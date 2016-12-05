@@ -273,6 +273,19 @@ describe('nmea',function() {
 
     })
 
+    it("ZDA decoder", function(){
+        var s = 'GNZDA';
+        var n = nmea.parse("$GNZDA,164521.00,02,12,2016,00,00*79");
+        assert.ok(n !== null,'parser result not null');
+        if (n !== null) {
+            assert.ok(n.id === s,s + '!== ' + n.id);
+            assert.equal(n.time, 164521.00);
+            assert.equal(n.date, 02);
+            assert.equal(n.month, 12);
+            assert.equal(n.year, 2016);
+        }
+    })
+    
     it("error handlers",function() {
         var n;
         
